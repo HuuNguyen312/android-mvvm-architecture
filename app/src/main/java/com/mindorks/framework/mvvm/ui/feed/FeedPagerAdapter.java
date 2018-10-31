@@ -29,20 +29,13 @@ import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceFragment;
 
 public class FeedPagerAdapter extends FragmentStatePagerAdapter {
 
-    private int mTabCount;
-
-    public FeedPagerAdapter(FragmentManager fragmentManager) {
+    FeedPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
-        this.mTabCount = 0;
     }
 
     @Override
     public int getCount() {
-        return mTabCount;
-    }
-
-    public void setCount(int count) {
-        mTabCount = count;
+        return 2;
     }
 
     @Override

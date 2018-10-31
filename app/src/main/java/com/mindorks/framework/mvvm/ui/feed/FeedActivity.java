@@ -29,6 +29,7 @@ import com.mindorks.framework.mvvm.BR;
 import com.mindorks.framework.mvvm.R;
 import com.mindorks.framework.mvvm.databinding.ActivityFeedBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseActivity;
+import com.mindorks.framework.mvvm.ui.base.BaseViewModel;
 
 import javax.inject.Inject;
 
@@ -40,13 +41,11 @@ import dagger.android.support.HasSupportFragmentInjector;
  * Created by amitshekhar on 10/07/17.
  */
 
-public class FeedActivity extends BaseActivity<ActivityFeedBinding, FeedViewModel> implements HasSupportFragmentInjector {
+public class FeedActivity extends BaseActivity<ActivityFeedBinding, BaseViewModel> implements HasSupportFragmentInjector {
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
-    @Inject
-    FeedViewModel mFeedViewModel;
-    @Inject
+
     FeedPagerAdapter mPagerAdapter;
     private ActivityFeedBinding mActivityFeedBinding;
 
@@ -65,11 +64,11 @@ public class FeedActivity extends BaseActivity<ActivityFeedBinding, FeedViewMode
     }
 
     @Override
-    public FeedViewModel getViewModel() {
-        return mFeedViewModel;
+    public BaseViewModel getViewModel() {
+        return null;
     }
 
-    @Override
+   /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
@@ -92,7 +91,7 @@ public class FeedActivity extends BaseActivity<ActivityFeedBinding, FeedViewMode
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
@@ -107,13 +106,7 @@ public class FeedActivity extends BaseActivity<ActivityFeedBinding, FeedViewMode
     }
 
     private void setUp() {
-        setSupportActionBar(mActivityFeedBinding.toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
-
-        mPagerAdapter.setCount(2);
+        mPagerAdapter = new FeedPagerAdapter(getSupportFragmentManager());
 
         mActivityFeedBinding.feedViewPager.setAdapter(mPagerAdapter);
 

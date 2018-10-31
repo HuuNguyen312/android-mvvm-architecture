@@ -25,7 +25,7 @@ import com.mindorks.framework.mvvm.BR;
 import com.mindorks.framework.mvvm.R;
 import com.mindorks.framework.mvvm.databinding.ActivityLoginBinding;
 import com.mindorks.framework.mvvm.ui.base.BaseActivity;
-import com.mindorks.framework.mvvm.ui.main.MainActivity;
+import com.mindorks.framework.mvvm.ui.feed.FeedActivity;
 
 import javax.inject.Inject;
 
@@ -77,7 +77,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void openMainActivity() {
-        Intent intent = MainActivity.newIntent(LoginActivity.this);
+        Intent intent = FeedActivity.newIntent(LoginActivity.this);
         startActivity(intent);
         finish();
     }

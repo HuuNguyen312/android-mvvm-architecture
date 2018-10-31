@@ -24,12 +24,15 @@ import com.mindorks.framework.mvvm.ui.base.BaseViewModel;
 import com.mindorks.framework.mvvm.utils.CommonUtils;
 import com.mindorks.framework.mvvm.utils.rx.SchedulerProvider;
 
+import javax.inject.Inject;
+
 /**
  * Created by amitshekhar on 08/07/17.
  */
 
 public class LoginViewModel extends BaseViewModel<LoginNavigator> {
 
+    @Inject
     public LoginViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
     }

@@ -19,7 +19,6 @@ apply from: '../config/quality/quality.gradle'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.mindorks.framework.mvvm"
         minSdkVersion rootProject.ext.minSdkVersion
