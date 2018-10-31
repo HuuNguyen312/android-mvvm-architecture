@@ -46,11 +46,6 @@ public class BlogFragmentModule {
     }
 
     @Provides
-    ViewModelProvider.Factory provideBlogViewModel(BlogViewModel blogViewModel) {
-        return new ViewModelProviderFactory<>(blogViewModel);
-    }
-
-    @Provides
     LinearLayoutManager provideLinearLayoutManager(BlogFragment fragment) {
         return new LinearLayoutManager(fragment.getActivity());
     }

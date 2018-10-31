@@ -27,26 +27,22 @@ import com.mindorks.framework.mvvm.utils.rx.SchedulerProvider;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by amitshekhar on 10/07/17.
  */
 
 public class BlogViewModel extends BaseViewModel<BlogNavigator> {
 
-    public final ObservableList<BlogResponse.Blog> blogObservableArrayList = new ObservableArrayList<>();
-
     private final MutableLiveData<List<BlogResponse.Blog>> blogListLiveData;
 
+    @Inject
     public BlogViewModel(DataManager dataManager,
                          SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
         blogListLiveData = new MutableLiveData<>();
         fetchBlogs();
-    }
-
-    public void addBlogItemsToList(List<BlogResponse.Blog> blogs) {
-        blogObservableArrayList.clear();
-        blogObservableArrayList.addAll(blogs);
     }
 
     public void fetchBlogs() {
@@ -70,7 +66,7 @@ public class BlogViewModel extends BaseViewModel<BlogNavigator> {
         return blogListLiveData;
     }
 
-    public ObservableList<BlogResponse.Blog> getBlogObservableList() {
-        return blogObservableArrayList;
-    }
+//    public ObservableList<BlogResponse.Blog> getBlogObservableList() {
+//        return blogObservableArrayList;
+//    }
 }

@@ -40,15 +40,6 @@ public final class BindingUtils {
     }
 
     @BindingAdapter({"adapter"})
-    public static void addBlogItems(RecyclerView recyclerView, List<BlogResponse.Blog> blogs) {
-        BlogAdapter adapter = (BlogAdapter) recyclerView.getAdapter();
-        if (adapter != null) {
-            adapter.clearItems();
-            adapter.addItems(blogs);
-        }
-    }
-
-    @BindingAdapter({"adapter"})
     public static void addOpenSourceItems(RecyclerView recyclerView, List<OpenSourceItemViewModel> openSourceItems) {
         OpenSourceAdapter adapter = (OpenSourceAdapter) recyclerView.getAdapter();
         if (adapter != null) {

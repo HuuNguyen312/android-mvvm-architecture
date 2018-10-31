@@ -20,6 +20,7 @@ import android.app.Application;
 
 import com.mindorks.framework.mvvm.MvvmApp;
 import com.mindorks.framework.mvvm.di.builder.ActivityBuilder;
+import com.mindorks.framework.mvvm.di.builder.FragmentBuilder;
 import com.mindorks.framework.mvvm.di.module.AppModule;
 
 import javax.inject.Singleton;
@@ -32,7 +33,7 @@ import dagger.android.AndroidInjectionModule;
  * Created by amitshekhar on 07/07/17.
  */
 @Singleton
-@Component(modules = {AndroidInjectionModule.class, AppModule.class, ActivityBuilder.class})
+@Component(modules = {AndroidInjectionModule.class, AppModule.class, ActivityBuilder.class, FragmentBuilder.class})
 public interface AppComponent {
 
     void inject(MvvmApp app);

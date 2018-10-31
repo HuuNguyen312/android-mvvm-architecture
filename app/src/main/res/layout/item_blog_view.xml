@@ -20,8 +20,8 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.feed.blogs.BlogItemViewModel" />
+            name="blog"
+            type="com.mindorks.framework.mvvm.data.model.api.BlogResponse.Blog" />
 
     </data>
 
@@ -35,7 +35,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:background="@color/white"
-            android:onClick="@{() -> viewModel.onItemClick()}"
             android:orientation="vertical"
             app:cardCornerRadius="7dp"
             app:cardElevation="4dp">
@@ -51,7 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:scaleType="fitCenter"
-                    app:imageUrl="@{viewModel.imageUrl}"
+                    app:imageUrl="@{blog.coverImgUrl}"
                     tools:src="@drawable/ic_rabbit" />
 
                 <TextView
@@ -62,7 +61,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="20dp"
-                    android:text="@{viewModel.title}"
+                    android:text="@{blog.title}"
                     tools:text="Android MVP Architecture" />
 
                 <RelativeLayout
@@ -79,7 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="@{viewModel.author}"
+                        android:text="@{blog.author}"
                         tools:text="Amit Shekhar" />
 
                     <TextView
@@ -88,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="@{viewModel.date}"
+                        android:text="@{blog.date}"
                         tools:text="23 Jan 2017" />
                 </RelativeLayout>
 
@@ -99,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:text="@{viewModel.content}"
+                    android:text="@{blog.description}"
                     android:textStyle="normal"
                     tools:text="This repository contains a detailed sample app that implements MVP architecture using Dagger2, GreenDao, RxJava2, FastAndroidNetworking and PlaceholderView" />
             </LinearLayout>
