@@ -18,16 +18,9 @@ package com.mindorks.framework.mvvm.utils;
 
 import android.content.Context;
 import android.databinding.BindingAdapter;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.mindorks.framework.mvvm.data.model.api.BlogResponse;
-import com.mindorks.framework.mvvm.ui.feed.blogs.BlogAdapter;
-import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceAdapter;
-import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceItemViewModel;
-
-import java.util.List;
 
 /**
  * Created by amitshekhar on 11/07/17.
@@ -37,15 +30,6 @@ public final class BindingUtils {
 
     private BindingUtils() {
         // This class is not publicly instantiable
-    }
-
-    @BindingAdapter({"adapter"})
-    public static void addOpenSourceItems(RecyclerView recyclerView, List<OpenSourceItemViewModel> openSourceItems) {
-        OpenSourceAdapter adapter = (OpenSourceAdapter) recyclerView.getAdapter();
-        if (adapter != null) {
-            adapter.clearItems();
-            adapter.addItems(openSourceItems);
-        }
     }
 
     @BindingAdapter("imageUrl")

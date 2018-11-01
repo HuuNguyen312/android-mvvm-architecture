@@ -38,7 +38,7 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
 
     private BaseActivity mActivity;
     private View mRootView;
-    private T mViewDataBinding;
+    protected T mDataBiding;
     private V mViewModel;
 
     /**
@@ -82,8 +82,8 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mViewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-        mRootView = mViewDataBinding.getRoot();
+        mDataBiding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
+        mRootView = mDataBiding.getRoot();
         return mRootView;
     }
 
@@ -96,16 +96,16 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mViewDataBinding.setVariable(getBindingVariable(), mViewModel);
-        mViewDataBinding.executePendingBindings();
+        mDataBiding.setVariable(getBindingVariable(), mViewModel);
+        mDataBiding.executePendingBindings();
     }
 
     public BaseActivity getBaseActivity() {
         return mActivity;
     }
 
-    public T getViewDataBinding() {
-        return mViewDataBinding;
+    public T getDataBinding() {
+        return mDataBiding;
     }
 
     public void hideKeyboard() {

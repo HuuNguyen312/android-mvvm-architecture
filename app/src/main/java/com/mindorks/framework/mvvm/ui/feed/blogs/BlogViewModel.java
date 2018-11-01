@@ -65,8 +65,4 @@ public class BlogViewModel extends BaseViewModel<BlogNavigator> {
     public MutableLiveData<List<BlogResponse.Blog>> getBlogListLiveData() {
         return blogListLiveData;
     }
-
-//    public ObservableList<BlogResponse.Blog> getBlogObservableList() {
-//        return blogObservableArrayList;
-//    }
 }

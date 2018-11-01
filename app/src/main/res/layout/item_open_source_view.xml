@@ -21,7 +21,7 @@
 
         <variable
             name="viewModel"
-            type="com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceItemViewModel" />
+            type="com.mindorks.framework.mvvm.data.model.api.OpenSourceResponse.Repo" />
 
     </data>
 
@@ -50,7 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:scaleType="fitCenter"
-                    app:imageUrl="@{viewModel.imageUrl}"
+                    app:imageUrl="@{viewModel.coverImgUrl}"
                     tools:src="@drawable/ic_rabbit" />
 
                 <TextView
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:text="@{viewModel.content}"
+                    android:text="@{viewModel.description}"
                     android:textStyle="normal"
                     tools:text="This repository contains a detailed sample app that implements MVP architecture using Dagger2, GreenDao, RxJava2, FastAndroidNetworking and PlaceholderView" />
             </LinearLayout>

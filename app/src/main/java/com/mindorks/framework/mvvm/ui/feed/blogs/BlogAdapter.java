@@ -50,8 +50,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemBlogViewBinding blogViewBinding = ItemBlogViewBinding.inflate(LayoutInflater.from(parent.getContext()),
-                parent, false);
+        ItemBlogViewBinding blogViewBinding = ItemBlogViewBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new BlogViewHolder(blogViewBinding);
     }
 

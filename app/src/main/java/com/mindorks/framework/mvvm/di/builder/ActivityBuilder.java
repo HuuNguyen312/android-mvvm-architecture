@@ -17,7 +17,6 @@
 package com.mindorks.framework.mvvm.di.builder;
 
 import com.mindorks.framework.mvvm.ui.feed.FeedActivity;
-import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceFragmentProvider;
 import com.mindorks.framework.mvvm.ui.login.LoginActivity;
 import com.mindorks.framework.mvvm.ui.splash.SplashActivity;
 
@@ -30,8 +29,7 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class ActivityBuilder {
 
-    @ContributesAndroidInjector(modules = {
-            OpenSourceFragmentProvider.class})
+    @ContributesAndroidInjector
     abstract FeedActivity bindFeedActivity();
 
     @ContributesAndroidInjector

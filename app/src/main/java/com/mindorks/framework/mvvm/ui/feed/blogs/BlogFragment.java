@@ -39,7 +39,6 @@ public class BlogFragment extends BaseFragment<FragmentBlogBinding, BlogViewMode
 
     @Inject
     BlogAdapter mBlogAdapter;
-    FragmentBlogBinding mFragmentBlogBinding;
     @Inject
     LinearLayoutManager mLayoutManager;
     @Inject
@@ -82,15 +81,14 @@ public class BlogFragment extends BaseFragment<FragmentBlogBinding, BlogViewMode
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mFragmentBlogBinding = getViewDataBinding();
         setUp();
         subscribeToLiveData();
     }
 
     private void setUp() {
-        mFragmentBlogBinding.blogRecyclerView.setLayoutManager(mLayoutManager);
-        mFragmentBlogBinding.blogRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mFragmentBlogBinding.blogRecyclerView.setAdapter(mBlogAdapter);
+        mDataBiding.blogRecyclerView.setLayoutManager(mLayoutManager);
+        mDataBiding.blogRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mDataBiding.blogRecyclerView.setAdapter(mBlogAdapter);
     }
 
     private void subscribeToLiveData() {

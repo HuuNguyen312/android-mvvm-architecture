@@ -28,26 +28,23 @@ import com.mindorks.framework.mvvm.utils.rx.SchedulerProvider;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by amitshekhar on 10/07/17.
  */
 
 public class OpenSourceViewModel extends BaseViewModel<OpenSourceNavigator> {
 
-    private final ObservableList<OpenSourceItemViewModel> openSourceItemViewModels = new ObservableArrayList<>();
 
-    private final MutableLiveData<List<OpenSourceItemViewModel>> openSourceItemsLiveData;
+    private final MutableLiveData<List<OpenSourceResponse.Repo>> openSourceItemsLiveData;
 
+    @Inject
     public OpenSourceViewModel(DataManager dataManager,
                                SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
         openSourceItemsLiveData = new MutableLiveData<>();
         fetchRepos();
-    }
-
-    public void addOpenSourceItemsToList(List<OpenSourceItemViewModel> openSourceItems) {
-        openSourceItemViewModels.clear();
-        openSourceItemViewModels.addAll(openSourceItems);
     }
 
     public void fetchRepos() {
@@ -58,7 +55,7 @@ public class OpenSourceViewModel extends BaseViewModel<OpenSourceNavigator> {
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(openSourceResponse -> {
                     if (openSourceResponse != null && openSourceResponse.getData() != null) {
-                        openSourceItemsLiveData.setValue(getViewModelList(openSourceResponse.getData()));
+                        openSourceItemsLiveData.setValue(openSourceResponse.getData());
                     }
                     setIsLoading(false);
                 }, throwable -> {
@@ -67,21 +64,7 @@ public class OpenSourceViewModel extends BaseViewModel<OpenSourceNavigator> {
                 }));
     }
 
-    public ObservableList<OpenSourceItemViewModel> getOpenSourceItemViewModels() {
-        return openSourceItemViewModels;
-    }
-
-    public MutableLiveData<List<OpenSourceItemViewModel>> getOpenSourceRepos() {
+    public MutableLiveData<List<OpenSourceResponse.Repo>> getOpenSourceItemsLiveData() {
         return openSourceItemsLiveData;
-    }
-
-    public List<OpenSourceItemViewModel> getViewModelList(List<OpenSourceResponse.Repo> repoList) {
-        List<OpenSourceItemViewModel> openSourceItemViewModels = new ArrayList<>();
-        for (OpenSourceResponse.Repo repo : repoList) {
-            openSourceItemViewModels.add(new OpenSourceItemViewModel(
-                    repo.getCoverImgUrl(), repo.getTitle(),
-                    repo.getDescription(), repo.getProjectUrl()));
-        }
-        return openSourceItemViewModels;
     }
 }
