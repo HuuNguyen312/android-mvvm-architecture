@@ -16,17 +16,16 @@
 
 package com.mindorks.framework.mvvm.ui.main;
 
-import android.arch.lifecycle.MutableLiveData;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableField;
-import android.databinding.ObservableList;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableList;
 import android.text.TextUtils;
-
 import com.mindorks.framework.mvvm.data.DataManager;
 import com.mindorks.framework.mvvm.data.model.others.QuestionCardData;
 import com.mindorks.framework.mvvm.ui.base.BaseViewModel;
 import com.mindorks.framework.mvvm.utils.rx.SchedulerProvider;
-
 import java.util.List;
 
 /**
@@ -65,7 +64,7 @@ public class MainViewModel extends BaseViewModel<MainNavigator> {
         return appVersion;
     }
 
-    public MutableLiveData<List<QuestionCardData>> getQuestionCardData() {
+    public LiveData<List<QuestionCardData>> getQuestionCardData() {
         return questionCardData;
     }
 
@@ -140,7 +139,6 @@ public class MainViewModel extends BaseViewModel<MainNavigator> {
 
     public void removeQuestionCard() {
         action = ACTION_DELETE_SINGLE;
-        questionDataList.remove(0);
         questionCardData.getValue().remove(0);
     }
 
