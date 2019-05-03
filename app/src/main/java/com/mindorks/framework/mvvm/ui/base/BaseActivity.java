@@ -20,19 +20,26 @@ import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.Fragment;
+
 import com.mindorks.framework.mvvm.ui.login.LoginActivity;
 import com.mindorks.framework.mvvm.utils.CommonUtils;
 import com.mindorks.framework.mvvm.utils.NetworkUtils;
-import dagger.android.AndroidInjection;
+
+import javax.inject.Inject;
+
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
@@ -40,15 +47,18 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 
 public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseViewModel> extends AppCompatActivity
-        implements BaseFragment.Callback {
+        implements BaseFragment.Callback, HasSupportFragmentInjector {
 
     // TODO
     // this can probably depend on isLoading variable of BaseViewModel,
     // since its going to be common for all the activities
     private ProgressDialog mProgressDialog;
-    private T mViewDataBinding;
-    private V mViewModel;
+    protected T mViewDataBinding;
+    @Inject
+    protected V mViewModel;
 
+    @Inject
+    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
     /**
      * Override for set binding variable
      *
@@ -62,13 +72,6 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
     public abstract
     @LayoutRes
     int getLayoutId();
-
-    /**
-     * Override for set view model
-     *
-     * @return view model instance
-     */
-    public abstract V getViewModel();
 
     @Override
     public void onFragmentAttached() {
@@ -87,7 +90,6 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        performDependencyInjection();
         super.onCreate(savedInstanceState);
         performDataBinding();
     }
@@ -127,10 +129,6 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         finish();
     }
 
-    public void performDependencyInjection() {
-        AndroidInjection.inject(this);
-    }
-
     @TargetApi(Build.VERSION_CODES.M)
     public void requestPermissionsSafely(String[] permissions, int requestCode) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -144,10 +142,16 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
     }
 
     private void performDataBinding() {
+        if (mViewModel == null) return;
+
         mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
-        this.mViewModel = mViewModel == null ? getViewModel() : mViewModel;
         mViewDataBinding.setVariable(getBindingVariable(), mViewModel);
         mViewDataBinding.executePendingBindings();
+    }
+
+    @Override
+    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
+        return dispatchingAndroidInjector;
     }
 }
 

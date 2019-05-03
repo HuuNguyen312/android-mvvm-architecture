@@ -27,18 +27,24 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.mindorks.framework.mvvm.di.Injectable;
+
+import javax.inject.Inject;
+
 import dagger.android.support.AndroidSupportInjection;
 
 /**
  * Created by amitshekhar on 09/07/17.
  */
 
-public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseViewModel> extends Fragment {
+public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseViewModel> extends Fragment implements Injectable {
 
     private BaseActivity mActivity;
     private View mRootView;
-    private T mViewDataBinding;
-    private V mViewModel;
+    protected T mViewDataBinding;
+    @Inject
+    protected V mViewModel;
 
     /**
      * Override for set binding variable
@@ -54,13 +60,6 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
     @LayoutRes
     int getLayoutId();
 
-    /**
-     * Override for set view model
-     *
-     * @return view model instance
-     */
-    public abstract V getViewModel();
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -73,9 +72,7 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        performDependencyInjection();
         super.onCreate(savedInstanceState);
-        mViewModel = getViewModel();
         setHasOptionsMenu(false);
     }
 
@@ -122,10 +119,6 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
         if (mActivity != null) {
             mActivity.openActivityOnTokenExpire();
         }
-    }
-
-    private void performDependencyInjection() {
-        AndroidSupportInjection.inject(this);
     }
 
     public interface Callback {

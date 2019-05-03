@@ -14,26 +14,21 @@
  *  limitations under the License
  */
 
-package com.mindorks.framework.mvvm.ui.feed.opensource;
+package com.mindorks.framework.mvvm.di.builder;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
+import com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceFragment;
+import com.mindorks.framework.mvvm.ui.login.LoginActivity;
+import com.mindorks.framework.mvvm.ui.splash.SplashActivity;
+
 import dagger.Module;
-import dagger.Provides;
+import dagger.android.ContributesAndroidInjector;
 
 /**
  * Created by amitshekhar on 14/09/17.
  */
 @Module
-public class OpenSourceFragmentModule {
+public abstract class FragmentBuilder {
 
-    @Provides
-    LinearLayoutManager provideLinearLayoutManager(OpenSourceFragment fragment) {
-        return new LinearLayoutManager(fragment.getActivity());
-    }
-
-    @Provides
-    OpenSourceAdapter provideOpenSourceAdapter() {
-        return new OpenSourceAdapter();
-    }
-
+    @ContributesAndroidInjector
+    abstract OpenSourceFragment openSourceFragment();
 }

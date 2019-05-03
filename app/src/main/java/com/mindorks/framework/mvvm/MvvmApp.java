@@ -18,13 +18,16 @@ package com.mindorks.framework.mvvm;
 
 import android.app.Activity;
 import android.app.Application;
+
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
-import com.mindorks.framework.mvvm.di.component.DaggerAppComponent;
+import com.mindorks.framework.mvvm.di.AppInjector;
 import com.mindorks.framework.mvvm.utils.AppLogger;
+
+import javax.inject.Inject;
+
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
-import javax.inject.Inject;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
@@ -34,24 +37,16 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 public class MvvmApp extends Application implements HasActivityInjector {
 
     @Inject
-    DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
+    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
 
     @Inject
     CalligraphyConfig mCalligraphyConfig;
 
     @Override
-    public DispatchingAndroidInjector<Activity> activityInjector() {
-        return activityDispatchingAndroidInjector;
-    }
-
-    @Override
     public void onCreate() {
         super.onCreate();
 
-        DaggerAppComponent.builder()
-                .application(this)
-                .build()
-                .inject(this);
+        AppInjector.init(this);
 
         AppLogger.init();
 
@@ -61,5 +56,10 @@ public class MvvmApp extends Application implements HasActivityInjector {
         }
 
         CalligraphyConfig.initDefault(mCalligraphyConfig);
+    }
+
+    @Override
+    public DispatchingAndroidInjector<Activity> activityInjector() {
+        return dispatchingAndroidInjector;
     }
 }

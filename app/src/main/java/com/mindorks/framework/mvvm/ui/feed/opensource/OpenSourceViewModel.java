@@ -26,6 +26,8 @@ import com.mindorks.framework.mvvm.utils.rx.SchedulerProvider;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -37,6 +39,7 @@ public class OpenSourceViewModel extends BaseViewModel<OpenSourceNavigator> {
 
     private final MutableLiveData<List<OpenSourceItemViewModel>> openSourceItemsLiveData;
 
+    @Inject
     public OpenSourceViewModel(DataManager dataManager,
                                SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);

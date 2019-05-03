@@ -47,7 +47,7 @@
             android:launchMode="singleTop" />
 
         <activity
-            android:name="com.mindorks.framework.mvvm.ui.feed.FeedActivity"
+            android:name="com.mindorks.framework.mvvm.ui.feed.opensource.OpenSourceActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".ui.main.MainActivity">
 
